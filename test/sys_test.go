@@ -3,11 +3,11 @@ package test
 import (
 	"testing"
 
-	sys "github.com/docker-desktop/GoDockerInfoFetcher/pkg/sys"
+	"github.com/docker-desktop/GoDockerInfoFetcher/pkg"
 )
 
 func TestIsDockerInstalled(t *testing.T) {
-	installed, err := sys.IsDockerInstalled()
+	installed, err := pkg.IsDockerInstalled()
 	if err != nil {
 		t.Errorf("IsDockerInstalled() error = %v, wantErr false", err)
 		return
@@ -19,7 +19,7 @@ func TestIsDockerInstalled(t *testing.T) {
 }
 
 func TestGetDockerVersion(t *testing.T) {
-	version := sys.GetDockerVersion()
+	version := pkg.GetDockerVersion()
 	if version == "" {
 		t.Errorf("GetDockerVersion() = %v, want not empty", version)
 	}

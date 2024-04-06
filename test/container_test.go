@@ -3,11 +3,15 @@ package test
 import (
 	"testing"
 
-	con "github.com/docker-desktop/GoDockerInfoFetcher/pkg/container"
+	"github.com/docker-desktop/GoDockerInfoFetcher/pkg"
 )
 
-func TestGetDockerContainers(t *testing.T) {
-	out, err := con.GetDockerContainers()
+var (
+	dockerContainerFetcher = pkg.NewDockerContainerFetcher()
+)
+
+func TestGetAllContainers(t *testing.T) {
+	out, err := dockerContainerFetcher.GetAllContainers()
 	if err != nil {
 		t.Errorf("GetDockerContainers() error = %v, wantErr false", err)
 		return
@@ -18,8 +22,8 @@ func TestGetDockerContainers(t *testing.T) {
 	}
 }
 
-func TestGetRunningDockerContainers(t *testing.T) {
-	out, err := con.GetRunningDockerContainers()
+func TestGetRunningContainers(t *testing.T) {
+	out, err := dockerContainerFetcher.GetRunningContainers()
 	if err != nil {
 		t.Errorf("GetRunningDockerContainers() error = %v, wantErr false", err)
 		return
