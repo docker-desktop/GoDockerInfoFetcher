@@ -3,11 +3,11 @@ package test
 import (
 	"testing"
 
-	"github.com/docker-desktop/GoDockerInfoFetcher/pkg"
+	GoDockerInfoFetcher "github.com/docker-desktop/GoDockerInfoFetcher/pkg"
 )
 
 var (
-	dockerContainerFetcher = pkg.NewDockerContainerFetcher()
+	dockerContainerFetcher = GoDockerInfoFetcher.NewDockerContainerFetcher()
 )
 
 func TestGetAllContainers(t *testing.T) {

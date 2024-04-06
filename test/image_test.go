@@ -1,14 +1,13 @@
 package test
 
 import (
-	"fmt"
 	"testing"
 
-	"github.com/docker-desktop/GoDockerInfoFetcher/pkg"
+	GoDockerInfoFetcher "github.com/docker-desktop/GoDockerInfoFetcher/pkg"
 )
 
 var (
-	dockerImageFetcher = pkg.NewDockerImageFetcher()
+	dockerImageFetcher = GoDockerInfoFetcher.NewDockerImageFetcher()
 )
 
 func TestGetDockerImages(t *testing.T) {
@@ -21,6 +20,4 @@ func TestGetDockerImages(t *testing.T) {
 	if len(out) == 0 {
 		t.Error("GetDockerImages() returned empty list, expected at least one image")
 	}
-
-	fmt.Println(out)
 }
