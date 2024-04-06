@@ -7,7 +7,6 @@ import (
 	"strings"
 )
 
-// DockerImage는 Docker 이미지의 정보를 나타냅니다.
 type DockerImage struct {
 	Repository string
 	Tag        string
@@ -16,7 +15,6 @@ type DockerImage struct {
 	Size       string
 }
 
-// parseDockerImagesOutput 함수는 `docker images` 명령의 출력을 분석
 func parseDockerImagesOutput(output string) []DockerImage {
 	images := []DockerImage{}
 	scanner := bufio.NewScanner(strings.NewReader(output))
@@ -39,7 +37,6 @@ func parseDockerImagesOutput(output string) []DockerImage {
 	return images
 }
 
-// GetDockerImages 함수는 설치된 Docker 이미지 목록을 반환합니다.
 func GetDockerImages() ([]DockerImage, error) {
 	cmd := exec.Command("docker", "images")
 	var out bytes.Buffer

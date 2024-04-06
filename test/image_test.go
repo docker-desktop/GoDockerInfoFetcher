@@ -8,7 +8,6 @@ import (
 
 func TestGetDockerImages(t *testing.T) {
 	out, err := img.GetDockerImages()
-
 	if err != nil {
 		t.Errorf("GetDockerImages() error = %v, wantErr false", err)
 		return
