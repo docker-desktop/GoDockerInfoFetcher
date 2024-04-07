@@ -7,11 +7,11 @@ import (
 )
 
 type DockerImage struct {
-	Repository string
-	Tag        string
-	ImageID    string
-	Created    string
-	Size       string
+	Repository string `json:"repository"`
+	Tag        string `json:"tag"`
+	ImageID    string `json:"image_id"`
+	Created    string `json:"created"`
+	Size       string `json:"size"`
 }
 
 type DockerImageFetcher interface {

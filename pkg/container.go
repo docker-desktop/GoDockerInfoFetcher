@@ -8,13 +8,13 @@ import (
 
 // DockerContainer 정보를 나타내는 구조체
 type DockerContainer struct {
-	ContainerID string
-	Image       string
-	Command     string
-	Created     string
-	Status      string
-	Ports       string
-	Names       string
+	ContainerID string `json:"container_id"`
+	Image       string `json:"image"`
+	Command     string `json:"command"`
+	Created     string `json:"created"`
+	Status      string `json:"status"`
+	Ports       string `json:"ports"`
+	Names       string `json:"names"`
 }
 
 type DockerContainerFetcher interface {
