@@ -11,6 +11,7 @@ import (
 )
 
 type Client interface {
+	Close() error
 	ContainerList(ctx context.Context) ([]types.Container, error)
 	ContainerListRunning(ctx context.Context) ([]types.Container, error)
 }
@@ -82,4 +83,8 @@ func (cli *client) get(ctx context.Context, path string, headers map[string]stri
 	}
 
 	return resp, nil
+}
+
+func (cli *client) Close() error {
+	return (*cli.Conn).Close()
 }
