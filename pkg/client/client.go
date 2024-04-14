@@ -12,6 +12,7 @@ import (
 
 type Client interface {
 	ContainerList(ctx context.Context) ([]types.Container, error)
+	ContainerListRunning(ctx context.Context) ([]types.Container, error)
 }
 
 type client struct {

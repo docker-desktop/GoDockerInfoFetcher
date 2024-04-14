@@ -20,5 +20,4 @@ func main() {
 	for _, container := range containers {
 		println(container.Id, container.Image, container.Status)
 	}
-
 }
