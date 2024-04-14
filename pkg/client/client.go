@@ -29,6 +29,15 @@ func newHTTPClient() *http.Client {
 	}
 }
 
+func newClient(dockerSock string) *net.Conn {
+	conn, err := net.Dial("unix", dockerSock)
+	if err != nil {
+		log.Fatal("Error connecting to Docker socket:", err)
+	}
+
+	return &conn
+}
+
 func buildRequest(ctx context.Context, method, path string, headers map[string]string) (*http.Request, error) {
 	req, err := http.NewRequestWithContext(ctx, method, path, nil)
 	if err != nil {
@@ -43,16 +52,12 @@ func buildRequest(ctx context.Context, method, path string, headers map[string]s
 }
 
 func NewClient(dockerSock string) Client {
-	conn, err := net.Dial("unix", dockerSock)
-	if err != nil {
-		log.Fatal("Error connecting to Docker socket:", err)
-	}
-
+	conn := newClient(dockerSock)
 	http_cli := newHTTPClient()
 
 	return &client{
 		Http: http_cli,
-		Conn: &conn,
+		Conn: conn,
 	}
 }
 
