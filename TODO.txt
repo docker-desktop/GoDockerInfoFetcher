@@ -1,3 +1,0 @@
-#TODO_1: Image/Container Struct Json Field Names (for the image/container struct json field names)
-! #TODO_2: Remove duplicate code -> Define as constant variable ( Image/ Container )
-#TODO_3: Edit Test Code ( Use Mock Data ) ( 인터페이스의 구현을 어떻게 모의/다양한 시나리오 설계)
