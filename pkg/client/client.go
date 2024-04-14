@@ -28,10 +28,14 @@ func newHTTPClient() *http.Client {
 	}
 }
 
-func buildRequest(ctx context.Context, method, path string) (*http.Request, error) {
+func buildRequest(ctx context.Context, method, path string, headers map[string]string) (*http.Request, error) {
 	req, err := http.NewRequestWithContext(ctx, method, path, nil)
 	if err != nil {
 		return nil, err
+	}
+
+	for key, value := range headers {
+		req.Header.Add(key, value)
 	}
 
 	return req, nil
@@ -66,8 +70,8 @@ func (cli *client) doRequest(req *http.Request) (*http.Response, error) {
 	return resp, nil
 }
 
-func (cli *client) get(ctx context.Context, path string) (*http.Response, error) {
-	req, err := buildRequest(ctx, http.MethodGet, path)
+func (cli *client) get(ctx context.Context, path string, headers map[string]string) (*http.Response, error) {
+	req, err := buildRequest(ctx, http.MethodGet, path, headers)
 	if err != nil {
 		return nil, err
 	}

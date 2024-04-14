@@ -11,7 +11,7 @@ import (
 func (cli *client) ContainerList(ctx context.Context) ([]types.Container, error) {
 	path := "/containers/json?all=1"
 
-	resp, err := cli.get(ctx, path)
+	resp, err := cli.get(ctx, path, map[string]string{"Content-Type": "application/json"})
 	if err != nil {
 		return nil, err
 	}
@@ -30,7 +30,7 @@ func (cli *client) ContainerList(ctx context.Context) ([]types.Container, error)
 func (cli *client) ContainerListRunning(ctx context.Context) ([]types.Container, error) {
 	path := "/containers/json?filters={\"status\":[\"running\"]}"
 
-	resp, err := cli.get(ctx, path)
+	resp, err := cli.get(ctx, path, map[string]string{"Content-Type": "application/json"})
 	if err != nil {
 		return nil, err
 	}
