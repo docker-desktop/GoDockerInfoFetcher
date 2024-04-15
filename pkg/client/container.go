@@ -44,3 +44,19 @@ func (cli *client) ContainerListRunning(ctx context.Context) ([]types.Container,
 
 	return containers, nil
 }
+
+// Get Container By Container ID
+
+// Get Container By Container Name
+
+// Get Container By Container Image ID
+
+// Get Container By Container Image Name
+
+// Get Container By Container Status
+
+// Get Container By Container Command
+
+// Get Container By Container Created Time
+
+// Get Container By Container Ports

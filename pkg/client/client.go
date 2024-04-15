@@ -14,6 +14,7 @@ type Client interface {
 	Close() error
 	ContainerList(ctx context.Context) ([]types.Container, error)
 	ContainerListRunning(ctx context.Context) ([]types.Container, error)
+	ImageList(ctx context.Context) ([]types.Image, error)
 }
 
 type client struct {
