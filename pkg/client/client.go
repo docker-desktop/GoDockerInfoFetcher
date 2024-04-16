@@ -17,7 +17,7 @@ type Client interface {
 	ContainerListRunning(ctx context.Context) ([]types.ContainerSummary, error)
 	ContainerInspect(ctx context.Context, containerID string) (types.ContainerDetails, error)
 
-	ImageList(ctx context.Context) ([]types.Image, error)
+	ImageList(ctx context.Context) ([]types.ImageSummary, error)
 }
 
 type client struct {

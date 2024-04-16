@@ -8,8 +8,8 @@ import (
 )
 
 // Get All Images
-func (cli *client) ImageList(ctx context.Context) ([]types.Image, error) {
-	path := "/images/json"
+func (cli *client) ImageList(ctx context.Context) ([]types.ImageSummary, error) {
+	path := "/images/json?all=1"
 
 	resp, err := cli.get(ctx, path, map[string]string{"Content-Type": "application/json"})
 	if err != nil {
@@ -17,7 +17,7 @@ func (cli *client) ImageList(ctx context.Context) ([]types.Image, error) {
 	}
 	defer resp.Body.Close()
 
-	var images []types.Image
+	var images []types.ImageSummary
 	err = json.NewDecoder(resp.Body).Decode(&images)
 	if err != nil {
 		return nil, err
