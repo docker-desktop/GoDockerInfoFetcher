@@ -63,17 +63,3 @@ func (cli *client) ContainerInspect(ctx context.Context, containerID string) (ty
 
 	return container, nil
 }
-
-// Get Container By Container Name
-
-// Get Container By Container Image ID
-
-// Get Container By Container Image Name
-
-// Get Container By Container Status
-
-// Get Container By Container Command
-
-// Get Container By Container Created Time
-
-// Get Container By Container Ports

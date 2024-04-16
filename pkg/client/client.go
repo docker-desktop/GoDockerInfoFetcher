@@ -12,6 +12,7 @@ import (
 
 type Client interface {
 	Close() error
+
 	ContainerList(ctx context.Context) ([]types.ContainerSummary, error)
 	ContainerListRunning(ctx context.Context) ([]types.ContainerSummary, error)
 	ContainerInspect(ctx context.Context, containerID string) (types.ContainerDetails, error)
