@@ -45,6 +45,25 @@ func (cli *client) ContainerListRunning(ctx context.Context) ([]types.ContainerS
 	return containers, nil
 }
 
+// Get Stopped Container List [docker ps -a]
+func (cli *client) ContainerListStopped(ctx context.Context) ([]types.ContainerSummary, error) {
+	path := "/containers/json?filters={\"status\":[\"exited\"]}"
+
+	resp, err := cli.get(ctx, path, map[string]string{"Content-Type": "application/json"})
+	if err != nil {
+		return nil, nil
+	}
+	defer resp.Body.Close()
+
+	var containers []types.ContainerSummary
+	err = json.NewDecoder(resp.Body).Decode(&containers)
+	if err != nil {
+		return nil, err
+	}
+
+	return containers, nil
+}
+
 // Get Container By Container ID
 func (cli *client) ContainerInspect(ctx context.Context, containerID string) (types.ContainerDetails, error) {
 	path := "/containers/" + containerID + "/json"

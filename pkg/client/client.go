@@ -15,6 +15,7 @@ type Client interface {
 
 	ContainerList(ctx context.Context) ([]types.ContainerSummary, error)
 	ContainerListRunning(ctx context.Context) ([]types.ContainerSummary, error)
+	ContainerListStopped(ctx context.Context) ([]types.ContainerSummary, error)
 	ContainerInspect(ctx context.Context, containerID string) (types.ContainerDetails, error)
 
 	ImageList(ctx context.Context) ([]types.ImageSummary, error)
