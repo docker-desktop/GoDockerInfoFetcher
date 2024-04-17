@@ -24,11 +24,13 @@ type Port struct {
 
 type ContainerDetails struct {
 	ID              string          `json:"Id"`
+	Name            string          `json:"Name"`
+	ImageID         string          `json:"Image"`               // Storing the image ID, renamed field for clarity
+	ImageName       string          `json:"ImageName,omitempty"` // Additional field for the image name
 	Created         string          `json:"Created"`
 	Path            string          `json:"Path"`
 	Args            []string        `json:"Args"`
 	State           ContainerState  `json:"State"`
-	Image           string          `json:"Image"`
 	ResolvConfPath  string          `json:"ResolvConfPath"`
 	HostnamePath    string          `json:"HostnamePath"`
 	HostsPath       string          `json:"HostsPath"`
@@ -37,7 +39,6 @@ type ContainerDetails struct {
 	NetworkSettings NetworkSettings `json:"NetworkSettings"`
 	Mounts          []Mount         `json:"Mounts"`
 	Config          ContainerConfig `json:"Config"`
-	// Many more fields can be included depending on the specific API version and Docker configuration
 }
 
 type ContainerState struct {
@@ -55,7 +56,6 @@ type ContainerState struct {
 }
 
 type NodeDetails struct {
-	// Node-specific details can be defined here
 }
 
 type NetworkSettings struct {
@@ -63,7 +63,6 @@ type NetworkSettings struct {
 	IPPrefixLen int    `json:"IPPrefixLen"`
 	Gateway     string `json:"Gateway"`
 	Bridge      string `json:"Bridge"`
-	// More fields depending on network configuration
 }
 
 type Mount struct {
@@ -86,5 +85,4 @@ type ContainerConfig struct {
 	StdinOnce    bool                `json:"StdinOnce"`
 	Env          []string            `json:"Env"`
 	Cmd          []string            `json:"Cmd"`
-	// Additional config parameters can be added here
 }

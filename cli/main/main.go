@@ -20,12 +20,12 @@ func main() {
 	}
 
 	for _, container := range containers {
-		log.Println(container.ID)
+		log.Println(container.ID, container.Names, container.Image)
 	}
 
 	container, err := client.ContainerInspect(ctx, containers[0].ID)
 	if err != nil {
-		fmt.Println(container)
+		log.Fatalln(err)
 	}
-
+	fmt.Println(container.Name, container.ID)
 }
