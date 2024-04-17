@@ -26,18 +26,4 @@ func (cli *client) ImageList(ctx context.Context) ([]types.ImageSummary, error) 
 	return images, nil
 }
 
-// Get Image By Image Name
-
 // Get Image By Image ID
-
-// Get Image By Image Tag
-
-// Get Image By Image Repository
-
-// Get Image By Image Created Time
-
-// Get Image By Image Size
-
-// Get Image By Image Virtual Size
-
-// Get Image By Image Parent ID
