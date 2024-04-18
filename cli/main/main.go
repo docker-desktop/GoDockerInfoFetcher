@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"github.com/docker-desktop/GoDockerInfoFetcher/pkg/client"
@@ -13,41 +14,28 @@ func main() {
 	dockerSocket := "/var/run/docker.sock"
 	client := client.NewClient(dockerSocket)
 
-	containers, err := client.ContainerList(ctx)
+	imags, err := client.ImageList(ctx)
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalln(err.Error())
 	}
 
-	log.Default().Println("All Containers")
-	for _, container := range containers {
-		log.Println(container.ID, container.Names, container.Image)
+	for _, img := range imags {
+		fmt.Println("ID:", img.ID)
+		fmt.Println("RepoTags:", img.RepoTags)
+		fmt.Println("RepoDigests:", img.RepoDigests)
+		fmt.Println("Created:", img.Created)
+		fmt.Println("Size:", img.Size)
+		fmt.Println("VirtualSize:", img.VirtualSize)
+		fmt.Println("Labels:", img.Labels)
+		fmt.Println("Containers:", img.Containers)
+		fmt.Println()
 	}
 
-	container, err := client.ContainerInspect(ctx, containers[0].ID)
+	inspectImage, err := client.ImageInspect(ctx, imags[0].ID)
 	if err != nil {
-		log.Fatalln(err)
-	}
-	log.Default().Println("Container Details")
-	log.Println(container.ID, container.Name, container.ID)
-
-	stoppedContainer, err := client.ContainerListStopped(ctx)
-	if err != nil {
-		log.Fatalln(err)
+		log.Fatalln(err.Error())
 	}
 
-	log.Default().Println("Stopped Containers")
-	for _, container := range stoppedContainer {
-		log.Println(container.ID, container.Names, container.Image)
-	}
-
-	runningContainer, err := client.ContainerListRunning(ctx)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	log.Default().Println("Running Containers")
-	for _, container := range runningContainer {
-		log.Println(container.ID, container.Names, container.Image)
-	}
-
+	fmt.Println("ID:", inspectImage.ID)
+	fmt.Println(inspectImage.Created, inspectImage.RepoTags)
 }
