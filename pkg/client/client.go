@@ -96,6 +96,20 @@ func (cli *client) get(ctx context.Context, path string, headers map[string]stri
 	return resp, nil
 }
 
+func (cli *client) delete(ctx context.Context, path string, headers map[string]string) (*http.Response, error) {
+	req, err := buildRequest(ctx, http.MethodDelete, path, headers)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := cli.doRequest(req)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp, nil
+}
+
 func (cli *client) Close() error {
 	return (*cli.Conn).Close()
 }

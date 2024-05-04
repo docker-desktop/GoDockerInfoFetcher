@@ -44,3 +44,16 @@ func (cli *client) ImageInspect(ctx context.Context, imageID string) (types.Imag
 
 	return image, nil
 }
+
+// Delete Image By Image ID
+func (cli *client) ImageDeleteByID(ctx context.Context, imageID string) error {
+	path := "/images/" + imageID + "/json"
+
+	resp, err := cli.delete(ctx, path, map[string]string{"Content-Type": "application/json"})
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	return nil
+}
