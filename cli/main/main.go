@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	"github.com/docker-desktop/GoDockerInfoFetcher/pkg/client"
@@ -13,29 +12,12 @@ func main() {
 	ctx := context.Background()
 	dockerSocket := "/var/run/docker.sock"
 	client := client.NewClient(dockerSocket)
+	defer client.Close()
 
-	imags, err := client.ImageList(ctx)
+	containers, err := client.ContainerList(ctx)
 	if err != nil {
-		log.Fatalln(err.Error())
+		log.Fatalln(err)
 	}
 
-	for _, img := range imags {
-		fmt.Println("ID:", img.ID)
-		fmt.Println("RepoTags:", img.RepoTags)
-		fmt.Println("RepoDigests:", img.RepoDigests)
-		fmt.Println("Created:", img.Created)
-		fmt.Println("Size:", img.Size)
-		fmt.Println("VirtualSize:", img.VirtualSize)
-		fmt.Println("Labels:", img.Labels)
-		fmt.Println("Containers:", img.Containers)
-		fmt.Println()
-	}
-
-	inspectImage, err := client.ImageInspect(ctx, imags[0].ID)
-	if err != nil {
-		log.Fatalln(err.Error())
-	}
-
-	fmt.Println("ID:", inspectImage.ID)
-	fmt.Println(inspectImage.Created, inspectImage.RepoTags)
+	log.Println(containers)
 }
