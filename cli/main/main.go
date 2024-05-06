@@ -22,8 +22,8 @@ func main() {
 
 	img_spec, _ := client.ImageInspect(ctx, images[0].ID)
 
-	fmt.Println(img_spec.ID)
+	fmt.Println(img_spec.RepoTags[0])
 
-	err = client.ImageDeleteByID(ctx, img_spec.ID)
+	err = client.ImageDeleteByName(ctx, img_spec.RepoTags[0])
 	fmt.Println(err)
 }
