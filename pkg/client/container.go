@@ -82,3 +82,16 @@ func (cli *client) ContainerInspect(ctx context.Context, containerID string) (ty
 
 	return container, nil
 }
+
+// Delete Container By Container ID
+func (cli *client) ContainerDeleteByID(ctx context.Context, containerID string) error {
+	path := "/containers/" + containerID
+
+	resp, err := cli.delete(ctx, path, nil)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	return nil
+}
