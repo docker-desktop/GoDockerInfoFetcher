@@ -20,6 +20,7 @@ type Client interface {
 
 	ImageList(ctx context.Context) ([]types.ImageSummary, error)
 	ImageInspect(ctx context.Context, imageID string) (types.ImageDetails, error)
+	ImageDeleteByID(ctx context.Context, imageID string) error
 }
 
 type client struct {

@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"github.com/docker-desktop/GoDockerInfoFetcher/pkg/client"
@@ -14,10 +15,15 @@ func main() {
 	client := client.NewClient(dockerSocket)
 	defer client.Close()
 
-	containers, err := client.ContainerList(ctx)
+	images, err := client.ImageList(ctx)
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalln(err.Error())
 	}
 
-	log.Println(containers)
+	img_spec, _ := client.ImageInspect(ctx, images[0].ID)
+
+	fmt.Println(img_spec.ID)
+
+	err = client.ImageDeleteByID(ctx, img_spec.ID)
+	fmt.Println(err)
 }
