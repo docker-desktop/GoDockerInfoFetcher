@@ -35,4 +35,25 @@ func main() {
 	if err != nil {
 		log.Fatalln(err.Error()) 
 	}
+
+	cnt_insp, err = client.ContainerInspect(ctx, containers[0].ID)
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+
+	fmt.Println("Contianer ID:", cnt_insp.ID)
+	fmt.Println("Container Status:", cnt_insp.State.Status)
+
+	err = client.ContainerStopByID(ctx, cnt_insp.ID) 
+	if err != nil {
+		log.Fatalln(err.Error()) 
+	}
+
+	cnt_insp, err = client.ContainerInspect(ctx, containers[0].ID)
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+
+	fmt.Println("Contianer ID:", cnt_insp.ID)
+	fmt.Println("Container Status:", cnt_insp.State.Status)
 }

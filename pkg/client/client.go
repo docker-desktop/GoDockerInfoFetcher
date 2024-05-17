@@ -19,6 +19,7 @@ type Client interface {
 	ContainerInspect(ctx context.Context, containerID string) (types.ContainerDetails, error)
 	ContainerDeleteByID(ctx context.Context, containerID string) error
 	ContainerStartByID(ctx context.Context, containerID string) error
+	ContainerStopByID(ctx context.Context, containerID string) error
 
 	ImageList(ctx context.Context) ([]types.ImageSummary, error)
 	ImageInspect(ctx context.Context, imageID string) (types.ImageDetails, error)

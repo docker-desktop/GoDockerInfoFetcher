@@ -110,3 +110,14 @@ func (cli *client) ContainerStartByID(ctx context.Context, containerID string) e
 }
 
 // STOP Container By Container ID 
+func (cli *client) ContainerStopByID(ctx context.Context, containerID string) error {
+	path := "/containers/" + containerID + "/stop"
+
+	resp, err := cli.post(ctx, path, nil) 
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	return nil
+}
