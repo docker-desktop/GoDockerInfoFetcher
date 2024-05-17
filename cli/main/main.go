@@ -56,4 +56,18 @@ func main() {
 
 	fmt.Println("Contianer ID:", cnt_insp.ID)
 	fmt.Println("Container Status:", cnt_insp.State.Status)
+
+	info, err := client.GetInfo(ctx)
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+
+	fmt.Println("Info:", info)
+
+	version, err := client.GetVersion(ctx)
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+
+	fmt.Println("Version:", version)
 }

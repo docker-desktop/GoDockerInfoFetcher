@@ -6,11 +6,13 @@ import (
 	"log"
 	"net"
 	"net/http"
-
+	"encoding/json"
 	types "github.com/docker-desktop/GoDockerInfoFetcher/pkg/type"
 )
 
 type Client interface {
+	GetInfo(ctx context.Context) (types.Info, error)
+	GetVersion(ctx context.Context) (types.VersionInfo, error)
 	Close() error
 
 	ContainerList(ctx context.Context) ([]types.ContainerSummary, error)
@@ -128,6 +130,43 @@ func (cli *client) post(ctx context.Context, path string, headers map[string]str
 	return resp, nil
 }
 
+func (cli *client) GetInfo(ctx context.Context) (types.Info, error) {
+	path := "/info"
+
+	resp, err := cli.get(ctx, path, nil)
+	if err != nil {
+		return types.Info{}, err
+	}
+	defer resp.Body.Close()
+
+	var info types.Info	
+	err = json.NewDecoder(resp.Body).Decode(&info)
+	if err != nil {
+		return types.Info{}, err
+	}
+
+	return info, nil
+}
+
+func (cli *client) GetVersion(ctx context.Context) (types.VersionInfo, error) {
+	path := "/version"
+
+	resp, err := cli.get(ctx, path, nil)
+	if err != nil {
+		return types.VersionInfo{}, err
+	}
+	defer resp.Body.Close()
+
+	var version types.VersionInfo
+	err = json.NewDecoder(resp.Body).Decode(&version)
+	if err != nil {
+		return types.VersionInfo{}, err
+	}
+
+	return version, nil
+}
+
 func (cli *client) Close() error {
 	return (*cli.Conn).Close()
 }
+

@@ -14,13 +14,3 @@ func IsDockerInstalled() (bool, error) {
 	return true, nil
 }
 
-// Docker Version 정보를 가져오는 함수
-func GetDockerVersion() string {
-	cmd := exec.Command("docker", "--version")
-	out, err := cmd.Output()
-	if err != nil {
-		return ""
-	}
-
-	return string(out)
-}
