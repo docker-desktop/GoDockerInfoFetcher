@@ -18,6 +18,7 @@ type Client interface {
 	ContainerListStopped(ctx context.Context) ([]types.ContainerSummary, error)
 	ContainerInspect(ctx context.Context, containerID string) (types.ContainerDetails, error)
 	ContainerDeleteByID(ctx context.Context, containerID string) error
+	ContainerStartByID(ctx context.Context, containerID string) error
 
 	ImageList(ctx context.Context) ([]types.ImageSummary, error)
 	ImageInspect(ctx context.Context, imageID string) (types.ImageDetails, error)
@@ -100,6 +101,20 @@ func (cli *client) get(ctx context.Context, path string, headers map[string]stri
 
 func (cli *client) delete(ctx context.Context, path string, headers map[string]string) (*http.Response, error) {
 	req, err := buildRequest(ctx, http.MethodDelete, path, headers)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := cli.doRequest(req)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp, nil
+}
+
+func (cli *client) post(ctx context.Context, path string, headers map[string]string) (*http.Response, error) {
+	req, err := buildRequest(ctx, http.MethodPost, path, headers)
 	if err != nil {
 		return nil, err
 	}

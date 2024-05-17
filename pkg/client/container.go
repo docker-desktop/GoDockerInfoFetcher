@@ -95,3 +95,18 @@ func (cli *client) ContainerDeleteByID(ctx context.Context, containerID string) 
 
 	return nil
 }
+
+// Start Container By Container ID 
+func (cli *client) ContainerStartByID(ctx context.Context, containerID string) error {
+	path := "/containers/" + containerID + "/start"
+
+	resp, err := cli.post(ctx, path, nil) 
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	return nil
+}
+
+// STOP Container By Container ID 

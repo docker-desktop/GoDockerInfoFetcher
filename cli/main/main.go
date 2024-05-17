@@ -28,24 +28,11 @@ func main() {
 		log.Fatalln(err.Error())
 	}
 
-	fmt.Println(containers[0].ID)
+	fmt.Println("Contianer ID:", cnt_insp.ID)
+	fmt.Println("Container Status:", cnt_insp.State.Status)
 
-	err = client.ContainerDeleteByID(ctx, cnt_insp.ID)
+	err = client.ContainerStartByID(ctx, cnt_insp.ID) 
 	if err != nil {
-		log.Fatalln(err.Error())
-	}
-
-	images, err := client.ImageList(ctx)
-	if err != nil {
-		log.Fatalln(err.Error())
-	}
-
-	img_spec, _ := client.ImageInspect(ctx, images[0].ID)
-
-	fmt.Println(img_spec.RepoTags[0])
-
-	err = client.ImageDeleteByName(ctx, img_spec.RepoTags[0])
-	if err != nil {
-		log.Fatalln(err.Error())
+		log.Fatalln(err.Error()) 
 	}
 }
